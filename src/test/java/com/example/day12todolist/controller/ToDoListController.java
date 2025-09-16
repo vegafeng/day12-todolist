@@ -53,10 +53,19 @@ public class ToDoListController {
 
     }
 
-
     @Test
     void should_response_created_when_post_given_valid_todo() throws Exception {
         Todo todo = Todo.builder().text("brouhaha").done(false).build();
+        String todoString = objectMapper.writeValueAsString(todo);
+        mockMvc.perform(post("/todos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoString))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    void should_throw_exception_when_post_given_invalid_todo_text_null() throws Exception {
+        Todo todo = Todo.builder().text("").done(false).build();
         String todoString = objectMapper.writeValueAsString(todo);
         mockMvc.perform(post("/todos")
                         .contentType(MediaType.APPLICATION_JSON)
