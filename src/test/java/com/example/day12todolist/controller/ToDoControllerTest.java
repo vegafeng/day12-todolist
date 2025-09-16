@@ -104,6 +104,13 @@ public class ToDoControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @Test
+    public void should_throw_exception_when_delete_given_no_id() throws Exception {
+        mockMvc.perform(delete("/todos/{id}", 999)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
 
     private Long createTodo() throws Exception {
         TodoDTO todo = TodoDTO.builder().text("brouhaha").done(false).build();
