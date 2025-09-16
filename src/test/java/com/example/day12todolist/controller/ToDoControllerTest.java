@@ -111,6 +111,19 @@ public class ToDoControllerTest {
     }
 
     @Test
+    void should_throw_exception_when_put_given_null_data() throws Exception {
+        long id = createTodo();
+        String todoDTOString = """
+                {}
+                """;
+        System.out.println(todoDTOString);
+        mockMvc.perform(put("/todos/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoDTOString))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
     public void should_return_no_content_when_delete_given_id() throws Exception {
         Long id = createTodo();
         TodoDTO todoDTO = TodoDTO.builder().text("Buy snacks").done(true).build();
