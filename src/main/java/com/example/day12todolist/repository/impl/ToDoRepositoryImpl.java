@@ -30,6 +30,7 @@ public class ToDoRepositoryImpl implements ToDoRepository {
 
     @Override
     public Todo findById(Long id) {
+        if (toDoJpaRepository.findById(id).isEmpty()) return null;
         return toDoJpaRepository.findById(id).get();
     }
 
