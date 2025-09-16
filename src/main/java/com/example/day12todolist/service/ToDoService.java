@@ -23,7 +23,9 @@ public class ToDoService {
     }
 
     public Todo addTodo(TodoDTO todo) {
-        if (todo.getText().isEmpty()) throw new InvalidTextException();
+        if (todo.getText().isEmpty()) {
+            throw new InvalidTextException();
+        }
         return toDoRepository.addTodo(todo);
     }
 
@@ -32,7 +34,10 @@ public class ToDoService {
     }
 
     public void updateById(Long id, TodoDTO todoDTO) throws IdNotFoundException {
-        if(toDoRepository.findById(id)==null) throw new IdNotFoundException();
+        Todo todo = toDoRepository.findById(id);
+        if(todo==null) {
+            throw new IdNotFoundException();
+        }
         toDoRepository.updateById(id, todoDTO);
     }
 }
