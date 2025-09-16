@@ -93,6 +93,17 @@ public class ToDoControllerTest {
                 .andExpect(status().isNoContent());
     }
 
+    @Test
+    public void should_return_no_content_when_delete_given_id() throws Exception {
+        Long id = createTodo();
+        TodoDTO todoDTO = TodoDTO.builder().text("Buy snacks").done(true).build();
+        String todoDTOString = objectMapper.writeValueAsString(todoDTO);
+        mockMvc.perform(delete("/todos/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoDTOString))
+                .andExpect(status().isNoContent());
+    }
+
 
     private Long createTodo() throws Exception {
         TodoDTO todo = TodoDTO.builder().text("brouhaha").done(false).build();
