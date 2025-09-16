@@ -41,7 +41,11 @@ public class ToDoService {
         toDoRepository.updateById(id, todoDTO);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Long id) throws IdNotFoundException {
+        Todo todo = toDoRepository.findById(id);
+        if(todo==null) {
+            throw new IdNotFoundException();
+        }
         toDoRepository.deleteById(id);
     }
 }
