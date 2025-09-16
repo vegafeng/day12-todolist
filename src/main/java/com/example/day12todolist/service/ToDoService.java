@@ -4,6 +4,7 @@ import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
 import com.example.day12todolist.exception.IdNotFoundException;
 import com.example.day12todolist.exception.InvalidTextException;
+import com.example.day12todolist.exception.NullValueException;
 import com.example.day12todolist.repository.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,9 @@ public class ToDoService {
     }
 
     public void updateById(Long id, TodoDTO todoDTO) throws IdNotFoundException {
+        if (todoDTO==null || (todoDTO.getText()==null && !todoDTO.isDone())) {
+            throw new NullValueException();
+        }
         Todo todo = toDoRepository.findById(id);
         if(todo==null) {
             throw new IdNotFoundException();
