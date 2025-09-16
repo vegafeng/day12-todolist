@@ -70,7 +70,7 @@ public class ToDoListController {
         mockMvc.perform(post("/todos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(todoString))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isUnprocessableEntity());
     }
 
     private Long createTodo() throws Exception {
