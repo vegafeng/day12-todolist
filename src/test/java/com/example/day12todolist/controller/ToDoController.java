@@ -2,7 +2,6 @@ package com.example.day12todolist.controller;
 
 import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @Transactional
-public class ToDoListController {
+public class ToDoController {
 
     @Autowired
     private MockMvc mockMvc;
@@ -71,6 +70,18 @@ public class ToDoListController {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(todoString))
                 .andExpect(status().isUnprocessableEntity());
+    }
+
+
+    @Test
+    public void should_return_ok_when_put_given_id() throws Exception {
+        Long id = createTodo();
+        TodoDTO todoDTO = TodoDTO.builder().text("Buy snacks").done(true).build();
+        String todoDTOString = objectMapper.writeValueAsString(todoDTO);
+        mockMvc.perform(put("/todos/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(todoDTOString))
+                .andExpect(status().isOk());
     }
 
     private Long createTodo() throws Exception {
