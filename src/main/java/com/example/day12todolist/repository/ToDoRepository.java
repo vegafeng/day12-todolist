@@ -12,5 +12,7 @@ import java.util.List;
 public interface ToDoRepository {
     public List<Todo> findAll();
 
-    public void addTodo(Todo todo);
+    public Todo addTodo(Todo todo);
+
+    public Todo findById(Long id);
 }

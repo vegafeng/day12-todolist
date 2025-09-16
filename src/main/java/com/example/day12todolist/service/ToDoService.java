@@ -19,7 +19,11 @@ public class ToDoService {
         return toDoRepository.findAll();
     }
 
-    public void addTodo(Todo todo) {
-        toDoRepository.addTodo(todo);
+    public Todo addTodo(Todo todo) {
+        return toDoRepository.addTodo(todo);
+    }
+
+    public Todo findById(Long id) {
+        return toDoRepository.findById(id);
     }
 }

@@ -21,7 +21,13 @@ public class ToDoRepositoryImpl implements ToDoRepository {
     }
 
     @Override
-    public void addTodo(Todo todo){
-        toDoJpaRepository.save(todo);
+    public Todo addTodo(Todo todo){
+//        toDoJpaRepository.save(todo);
+        return toDoJpaRepository.save(todo);
+    }
+
+    @Override
+    public Todo findById(Long id) {
+        return toDoJpaRepository.findById(id).get();
     }
 }
