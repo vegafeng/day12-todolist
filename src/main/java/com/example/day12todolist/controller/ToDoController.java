@@ -34,5 +34,11 @@ public class ToDoController {
     public ResponseEntity<Todo> addTodo(@RequestBody TodoDTO todoDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.addTodo(todoDto));
     }
+    @PutMapping("/todos/{id}")
+    public ResponseEntity<Void> updateById(@PathVariable Long id, @RequestBody TodoDTO todoDTO){
+        toDoService.updateById(id, todoDTO);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
