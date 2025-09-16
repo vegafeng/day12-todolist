@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * @author FENGVE
  */
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ToDoController {
     @Autowired
