@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @Transactional
-public class ToDoController {
+public class ToDoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -81,7 +81,7 @@ public class ToDoController {
         mockMvc.perform(put("/todos/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(todoDTOString))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
     }
 
     private Long createTodo() throws Exception {
