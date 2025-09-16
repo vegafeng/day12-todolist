@@ -1,8 +1,10 @@
 package com.example.day12todolist.controller;
 
+import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
+@Transactional
 public class ToDoListController {
 
     @Autowired
@@ -62,7 +65,7 @@ public class ToDoListController {
     }
 
     private Long createTodo() throws Exception {
-        Todo todo = Todo.builder().text("brouhaha").done(false).build();
+        TodoDTO todo = TodoDTO.builder().text("brouhaha").done(false).build();
         String todoString = objectMapper.writeValueAsString(todo);
         ResultActions resultActions = mockMvc.perform(post("/todos")
                         .contentType(MediaType.APPLICATION_JSON)

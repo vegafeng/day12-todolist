@@ -1,5 +1,6 @@
 package com.example.day12todolist.repository.impl;
 
+import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
 import com.example.day12todolist.repository.ToDoRepository;
 import com.example.day12todolist.repository.jpa.ToDoJpaRepository;
@@ -21,8 +22,9 @@ public class ToDoRepositoryImpl implements ToDoRepository {
     }
 
     @Override
-    public Todo addTodo(Todo todo){
+    public Todo addTodo(TodoDTO todoDto){
 //        toDoJpaRepository.save(todo);
+        Todo todo = Todo.builder().text(todoDto.getText()).done(todoDto.isDone()).build();
         return toDoJpaRepository.save(todo);
     }
 

@@ -1,5 +1,6 @@
 package com.example.day12todolist.service;
 
+import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
 import com.example.day12todolist.repository.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class ToDoService {
         return toDoRepository.findAll();
     }
 
-    public Todo addTodo(Todo todo) {
+    public Todo addTodo(TodoDTO todo) {
         return toDoRepository.addTodo(todo);
     }
 

@@ -1,5 +1,6 @@
 package com.example.day12todolist.controller;
 
+import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
 import com.example.day12todolist.service.ToDoService;
 import org.hibernate.annotations.ConcreteProxy;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * @author FENGVE
  */
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ToDoController {
     @Autowired
@@ -29,8 +31,8 @@ public class ToDoController {
         return toDoService.findById(id);
     }
     @PostMapping("/todos")
-    public ResponseEntity<Todo> addTodo(@RequestBody Todo todo){
-        return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.addTodo(todo));
+    public ResponseEntity<Todo> addTodo(@RequestBody TodoDTO todoDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.addTodo(todoDto));
     }
 
 }
