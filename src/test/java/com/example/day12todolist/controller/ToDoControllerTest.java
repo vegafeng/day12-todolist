@@ -72,6 +72,15 @@ public class ToDoControllerTest {
                 .andExpect(status().isUnprocessableEntity());
     }
 
+    @Test
+    void should_throw_exception_when_put_given_invalid_id() throws Exception {
+        TodoDTO todoDTO = TodoDTO.builder().text("Buy snacks").done(true).build();
+        String todoDTOString = objectMapper.writeValueAsString(todoDTO);
+        mockMvc.perform(put("/todos/{id}", 999)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoDTOString))
+                .andExpect(status().isNotFound());
+    }
 
     @Test
     public void should_return_ok_when_put_given_id() throws Exception {
@@ -83,6 +92,7 @@ public class ToDoControllerTest {
                 .content(todoDTOString))
                 .andExpect(status().isNoContent());
     }
+
 
     private Long createTodo() throws Exception {
         TodoDTO todo = TodoDTO.builder().text("brouhaha").done(false).build();
