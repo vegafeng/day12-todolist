@@ -2,6 +2,7 @@ package com.example.day12todolist.service;
 
 import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
+import com.example.day12todolist.exception.InvalidTextException;
 import com.example.day12todolist.repository.ToDoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class ToDoService {
     }
 
     public Todo addTodo(TodoDTO todo) {
+        if (todo.getText().isEmpty()) throw new InvalidTextException();
         return toDoRepository.addTodo(todo);
     }
 
