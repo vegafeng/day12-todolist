@@ -73,6 +73,23 @@ public class ToDoControllerTest {
     }
 
     @Test
+    void should_return_your_id_when_post_given_a_id() throws Exception {
+        Todo todo = Todo.builder().text("brouhaha").done(false).id(123L).build();
+        String todoString = objectMapper.writeValueAsString(todo);
+        ResultActions resultActions = mockMvc.perform(post("/todos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoString))
+                .andExpect(status().isCreated());
+        MvcResult mvcResult = resultActions.andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+        long id =  new ObjectMapper().readTree(contentAsString).get("id").asLong();
+        resultActions.andExpect(status().isCreated());
+        resultActions.andExpect(jsonPath("$.id").value(id));
+
+    }
+
+
+    @Test
     void should_throw_exception_when_put_given_invalid_id() throws Exception {
         TodoDTO todoDTO = TodoDTO.builder().text("Buy snacks").done(true).build();
         String todoDTOString = objectMapper.writeValueAsString(todoDTO);
