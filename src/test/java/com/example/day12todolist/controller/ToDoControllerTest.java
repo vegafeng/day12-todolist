@@ -124,6 +124,23 @@ public class ToDoControllerTest {
     }
 
     @Test
+    void should_update_matching_todo_when_put_given_another_id() throws Exception {
+        Long id = createTodo();
+        Long id2 = createTodo();
+        Todo todo = Todo.builder().text("Buy snacks").done(true).id(id2).build();
+        String todoString = objectMapper.writeValueAsString(todo);
+        mockMvc.perform(put("/todos/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoString))
+                .andExpect(status().isNoContent());
+        mockMvc.perform(get("/todos/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.text").value("Buy snacks"));
+    }
+
+    @Test
     public void should_return_no_content_when_delete_given_id() throws Exception {
         Long id = createTodo();
         TodoDTO todoDTO = TodoDTO.builder().text("Buy snacks").done(true).build();
