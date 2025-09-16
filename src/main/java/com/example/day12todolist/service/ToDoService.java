@@ -35,7 +35,7 @@ public class ToDoService {
     }
 
     public void updateById(Long id, TodoDTO todoDTO) throws IdNotFoundException {
-        if (todoDTO==null || (todoDTO.getText()==null && !todoDTO.isDone())) {
+        if (todoDTO==null || todoDTO.getText()==null || !todoDTO.isDone()) {
             throw new NullValueException();
         }
         Todo todo = toDoRepository.findById(id);
