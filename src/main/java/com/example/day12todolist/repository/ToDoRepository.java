@@ -16,4 +16,6 @@ public interface ToDoRepository {
     public Todo addTodo(TodoDTO todoDto);
 
     public Todo findById(Long id);
+
+    public void updateById(Long id, TodoDTO todoDTO);
 }

@@ -32,4 +32,12 @@ public class ToDoRepositoryImpl implements ToDoRepository {
     public Todo findById(Long id) {
         return toDoJpaRepository.findById(id).get();
     }
+
+    @Override
+    public void updateById(Long id, TodoDTO todoDTO) {
+        Todo todo = toDoJpaRepository.findById(id).get();
+        todo.setText(todoDTO.getText());
+        todo.setDone(todoDTO.isDone());
+        toDoJpaRepository.save(todo);
+    }
 }

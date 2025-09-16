@@ -29,4 +29,8 @@ public class ToDoService {
     public Todo findById(Long id) {
         return toDoRepository.findById(id);
     }
+
+    public void updateById(Long id, TodoDTO todoDTO) {
+        toDoRepository.updateById(id, todoDTO);
+    }
 }
