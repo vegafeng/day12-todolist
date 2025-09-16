@@ -35,7 +35,6 @@ public class ToDoControllerTest {
 
     @Test
     void should_return_all_todos_when_get_given_null() throws Exception {
-//        Todo todo = Todo.builder().text("brouhaha").done(false).build();
         mockMvc.perform(get("/todos")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -116,6 +115,17 @@ public class ToDoControllerTest {
         String todoDTOString = """
                 {}
                 """;
+        System.out.println(todoDTOString);
+        mockMvc.perform(put("/todos/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoDTOString))
+                .andExpect(status().isUnprocessableEntity());
+    }
+    @Test
+    void should_throw_exception_when_put_given_null_text() throws Exception {
+        long id = createTodo();
+        TodoDTO todoDTO = TodoDTO.builder().text("").done(false).build();
+        String todoDTOString = objectMapper.writeValueAsString(todoDTO);
         System.out.println(todoDTOString);
         mockMvc.perform(put("/todos/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
