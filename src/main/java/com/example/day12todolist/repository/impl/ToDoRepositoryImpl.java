@@ -19,4 +19,9 @@ public class ToDoRepositoryImpl implements ToDoRepository {
     public List<Todo> findAll() {
         return toDoJpaRepository.findAll();
     }
+
+    @Override
+    public void addTodo(Todo todo){
+        toDoJpaRepository.save(todo);
+    }
 }

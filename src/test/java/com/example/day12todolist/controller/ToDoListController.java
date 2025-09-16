@@ -38,6 +38,14 @@ public class ToDoListController {
                 .andExpect(jsonPath("$.length()").value(0));
     }
 
-
+    @Test
+    void should_response_created_when_post_given_valid_todo() throws Exception {
+        Todo todo = Todo.builder().text("brouhaha").done(false).build();
+        String todoString = objectMapper.writeValueAsString(todo);
+        mockMvc.perform(post("/todos")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(todoString))
+                .andExpect(status().isCreated());
+    }
 
 }

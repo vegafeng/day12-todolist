@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface ToDoRepository {
     public List<Todo> findAll();
+
+    public void addTodo(Todo todo);
 }
