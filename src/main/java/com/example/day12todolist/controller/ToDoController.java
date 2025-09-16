@@ -2,6 +2,7 @@ package com.example.day12todolist.controller;
 
 import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
+import com.example.day12todolist.exception.IdNotFoundException;
 import com.example.day12todolist.service.ToDoService;
 import org.hibernate.annotations.ConcreteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class ToDoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.addTodo(todoDto));
     }
     @PutMapping("/todos/{id}")
-    public ResponseEntity<Void> updateById(@PathVariable Long id, @RequestBody TodoDTO todoDTO){
+    public ResponseEntity<Void> updateById(@PathVariable Long id, @RequestBody TodoDTO todoDTO) throws IdNotFoundException {
         toDoService.updateById(id, todoDTO);
         return ResponseEntity.noContent().build();
     }
