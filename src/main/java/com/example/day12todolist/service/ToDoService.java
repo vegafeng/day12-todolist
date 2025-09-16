@@ -40,4 +40,8 @@ public class ToDoService {
         }
         toDoRepository.updateById(id, todoDTO);
     }
+
+    public void deleteById(Long id) {
+        toDoRepository.deleteById(id);
+    }
 }
