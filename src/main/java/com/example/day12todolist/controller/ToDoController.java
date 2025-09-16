@@ -41,5 +41,11 @@ public class ToDoController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/todos/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        toDoService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
