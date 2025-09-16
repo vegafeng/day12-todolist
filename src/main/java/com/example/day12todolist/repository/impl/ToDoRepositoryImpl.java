@@ -43,4 +43,9 @@ public class ToDoRepositoryImpl implements ToDoRepository {
         todo.setDone(todoDTO.isDone());
         toDoJpaRepository.save(todo);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        toDoJpaRepository.deleteById(id);
+    }
 }

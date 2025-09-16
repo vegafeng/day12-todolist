@@ -18,4 +18,6 @@ public interface ToDoRepository {
     public Todo findById(Long id);
 
     public void updateById(Long id, TodoDTO todoDTO);
+
+    public void deleteById(Long id);
 }
