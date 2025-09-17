@@ -1,5 +1,6 @@
 package com.example.day12todolist.service;
 
+import ch.qos.logback.core.util.StringUtil;
 import com.example.day12todolist.dto.TodoDTO;
 import com.example.day12todolist.entity.Todo;
 import com.example.day12todolist.exception.IdNotFoundException;
@@ -24,7 +25,7 @@ public class ToDoService {
     }
 
     public Todo addTodo(TodoDTO todo) {
-        if (todo.getText().isEmpty()) {
+        if (StringUtil.isNullOrEmpty(todo.getText())) {
             throw new InvalidTextException();
         }
         return toDoRepository.addTodo(todo);
@@ -35,7 +36,7 @@ public class ToDoService {
     }
 
     public void updateById(Long id, TodoDTO todoDTO) throws IdNotFoundException {
-        if (todoDTO==null || todoDTO.getText()==null) {
+        if (todoDTO==null || StringUtil.isNullOrEmpty(todoDTO.getText())) {
             throw new NullValueException();
         }
 

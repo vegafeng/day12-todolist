@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class ToDoController {
         return toDoService.findById(id);
     }
     @PostMapping("/todos")
-    public ResponseEntity<Todo> addTodo(@RequestBody TodoDTO todoDto){
+    public ResponseEntity<Todo> addTodo(@RequestBody @Validated TodoDTO todoDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(toDoService.addTodo(todoDto));
     }
     @PutMapping("/todos/{id}")
